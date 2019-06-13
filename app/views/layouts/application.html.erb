@@ -6,10 +6,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <nav class="flex items-center justify-between flex-wrap bg-orange-400 py-6 px-10">
+      <div class="flex items-center flex-shrink-0 text-white mr-8">
+        <span class="font-semibold text-xl tracking-tight">Documents</span>
+      </div>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
