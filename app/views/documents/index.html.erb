@@ -1,0 +1,6 @@
+<ul>
+  <% documents.each do |document| %>
+    <li><%= document.name %> ( <%= document.mimetype %> ) : <%= document.path %></li>
+  <% end %>
+</ul>
+
