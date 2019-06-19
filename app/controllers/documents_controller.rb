@@ -12,6 +12,11 @@ class DocumentsController < ApplicationController
     doc.process_file if create_params[:file]
   end
 
+  def show
+    document = Document.find(params[:id])
+    render :show, locals: { document: document }
+  end
+
   def edit
     render :edit, locals: { document: Document.find(params[:id]), all_tags: all_tags }
   end

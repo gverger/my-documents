@@ -1,0 +1,46 @@
+<div class="container mx-auto bg-white mb-10 p-6 text-center">
+  <div class="flex items-center mx-auto">
+    <div class="w-1/4">
+    </div>
+    <h2 class="w-2/4 font-bold text-xl">
+      <%= document.name %>
+    </h2>
+    <div class="w-1/4 flex-row-reverse">
+      <%= render partial: 'tags_list', locals: { tags: document.tags } %>
+    </div>
+  </div>
+  <div class="text-gray-500">
+    <%= document.description %>
+  </div>
+</div>
+
+<div class="container mx-auto">
+  <ul class="flex border-b">
+    <% tabs = { 'open' => 'Fichier', 'text' => 'Texte extrait' } %>
+    <% current_tab = tabs.key?(request.params[:tab]) ? request.params[:tab] : 'open' %>
+
+    <% tabs.each do |tab, title| %>
+      <% if tab == current_tab %>
+        <li class="-mb-px mr-1">
+          <%= link_to title, request.params.merge(tab: tab), class: "bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-blue-700 font-semibold"  %>
+        </li>
+      <% else %>
+        <li class="mr-1">
+          <%= link_to title, request.params.merge(tab: tab), class: "bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <% if request.params[:tab] == 'text' %>
+    <% if document.extracted_text.present?  %>
+      <pre class="container mx-auto mb-10 rounded bg-white text-xs pt-3">
+       <%= document.extracted_text %>
+      </pre>
+    <% else %>
+      <p class="text-gray-500">Aucun texte détecté...</p>
+    <% end %>
+  <% else %>
+    <iframe class="container mx-auto h-screen pt-3" src="<%= pdfjs.full_path(file: rails_blob_path(document.file, disposition: "attachment")) %>" frameborder="0"></iframe>
+  <% end %>
+</div>

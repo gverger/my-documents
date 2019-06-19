@@ -5,11 +5,11 @@
         <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex">
           <div class="w-4/5 flex">
             <% if document.file.present? %>
-              <%= link_to image_tag(document.thumbnail("100x100"),class: "h-16 shadow-xl mr-6" ),pdfjs.full_path(file: rails_blob_path(document.file, disposition: "attachment")) %>
+              <%= link_to image_tag(document.thumbnail("100x100"),class: "h-16 shadow-xl mr-6" ), document_path(document) %>
             <% end %>
             <div class="text-left w-auto inline-block">
               <div class="flex items-center">
-                <div>
+                <div class="mr-4">
                   <h2 class="text-lg mr-6">
                     <%= document.name %>
                   </h2>
