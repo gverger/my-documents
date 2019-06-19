@@ -1,6 +1,34 @@
-<ul>
-  <% documents.each do |document| %>
-    <li><%= document.name %> ( <%= document.mimetype %> ) : <%= document.path %></li>
-  <% end %>
-</ul>
+<div class="mb-10">
+  <ul>
+    <% documents.each do |document| %>
+      <li class="container mx-auto">
+        <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex">
+          <div class="w-4/5 flex">
+            <%= image_tag document.thumbnail("100x100"), class: "h-16 shadow-xl mr-6" %>
+            <div class="text-left w-auto inline-block">
+              <div class="flex">
+                <h2 class="text-lg mr-6">
+                  <%= document.name %>
+                </h2>
+                <div class="text-gray-500">
+                  ( <%= document.description %> )
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-1/5 flex items-center">
+            <%= link_to edit_document_path(document), class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex object-right" do %>
+              <%= mi.edit %>
+              <span>Edit</span>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 
+</div>
+
+<div class="container mx-auto">
+  <%= link_to "New", new_document_path, class: "bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded shadow-lg" %>
+</div>

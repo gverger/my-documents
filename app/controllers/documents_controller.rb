@@ -3,6 +3,14 @@ class DocumentsController < ApplicationController
     render :index, locals: { documents: Document.all }
   end
 
+  def new
+    render :new, locals: { document: Document.new }
+  end
+
+  def create
+    Document.create!(create_params)
+  end
+
   def edit
     render :edit, locals: { document: Document.find(params[:id]) }
   end
@@ -15,6 +23,10 @@ class DocumentsController < ApplicationController
   private
 
   def update_params
-    params.require(:document).permit(:name)
+    params.require(:document).permit(:name, :file)
+  end
+
+  def create_params
+    params.require(:document).permit(:name, :file)
   end
 end
