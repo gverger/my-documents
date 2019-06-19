@@ -8,7 +8,8 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    Document.create!(create_params)
+    doc = Document.create!(create_params)
+    doc.process_file if create_params[:file]
   end
 
   def edit
@@ -18,6 +19,7 @@ class DocumentsController < ApplicationController
   def update
     document = Document.find(params[:id])
     document.update(update_params)
+    document.process_file if create_params[:file]
   end
 
   private
@@ -40,12 +42,16 @@ class DocumentsController < ApplicationController
 
   def indexed_documents
     query = Document.with_attached_file.includes(:tags)
-    return query unless index_params[:search]
+    return query unless index_params[:search].present?
 
     search = query.search do
       fulltext "#{index_params[:search]}~1"
     end
 
     search.results
+  end
+
+  def process_file
+
   end
 end

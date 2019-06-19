@@ -17,7 +17,7 @@
       </div>
       <div class="w-2/4 flex items-center">
         <%= form_with url: documents_path, method: 'get', local: true, class: 'w-full rounded bg-gray-200 flex py-2 items-center' do %>
-            <%= button_tag :submit, class:'px-2 text-gray-500 items-center flex leading-none' do %>
+            <%= button_tag :submit, name: nil, class:'px-2 text-gray-500 items-center flex leading-none' do %>
               <%= mi.search.css_class('fill-current') %>
             <% end %>
             <%= text_field_tag :search, params[:search], class: 'appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none' %>
