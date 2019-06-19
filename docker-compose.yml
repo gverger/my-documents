@@ -1,0 +1,9 @@
+version: '3'
+services:
+  solr:
+    image: solr:8
+    ports:
+     - "8982:8983"
+    command:
+      - solr-precreate
+      - development

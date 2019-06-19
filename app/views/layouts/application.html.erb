@@ -11,12 +11,19 @@
   </head>
 
   <body class="bg-gray-100">
-    <nav class="flex items-center justify-between flex-wrap bg-orange-400 py-6 px-10 mb-10">
-      <div class="flex items-center flex-shrink-0 text-white mr-8">
+    <nav class="flex items-center bg-orange-400 py-6 px-10 mb-10">
+      <div class="w-1/4 items-center text-white">
         <%= link_to "Documents", root_path, class: "font-semibold text-xl tracking-tight" %>
       </div>
+      <div class="w-2/4 flex items-center">
+        <%= form_with url: documents_path, method: 'get', local: true, class: 'w-full rounded bg-gray-200 flex py-2 items-center' do %>
+            <%= button_tag :submit, class:'px-2 text-gray-500 items-center flex leading-none' do %>
+              <%= mi.search.css_class('fill-current') %>
+            <% end %>
+            <%= text_field_tag :search, params[:search], class: 'appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none' %>
+        <% end %>
+      </div>
     </nav>
-
     <%= yield %>
   </body>
 </html>

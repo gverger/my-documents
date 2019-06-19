@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   def index
-    render :index, locals: { documents: Document.all.with_attached_file.includes(:tags) }
+    render :index, locals: { documents: indexed_documents }
   end
 
   def new
@@ -30,7 +30,22 @@ class DocumentsController < ApplicationController
     params.require(:document).permit(:name, :description, :file, tag_ids: [])
   end
 
+  def index_params
+    params.permit(:search)
+  end
+
   def all_tags
     Tag.all
+  end
+
+  def indexed_documents
+    query = Document.with_attached_file.includes(:tags)
+    return query unless index_params[:search]
+
+    search = query.search do
+      fulltext "#{index_params[:search]}~1"
+    end
+
+    search.results
   end
 end

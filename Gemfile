@@ -29,7 +29,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'material_icons'
-gem "mini_magick"
+gem 'mini_magick'
+
+gem 'sunspot_rails'
+gem 'sunspot_solr' # Will probably need to live in the development group
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
