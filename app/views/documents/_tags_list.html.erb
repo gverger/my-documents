@@ -1,0 +1,7 @@
+<div class="flex">
+  <% tags.each do |tag| %>
+    <div class="mr-1 text-xs text-white px-1 rounded font-bold border border-<%= tag.color %>-500 bg-<%= tag.color %>-400">
+      <%= tag.name %>
+    </div>
+  <% end %>
+</div>

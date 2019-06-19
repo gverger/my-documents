@@ -1,10 +1,10 @@
 class DocumentsController < ApplicationController
   def index
-    render :index, locals: { documents: Document.all }
+    render :index, locals: { documents: Document.all.with_attached_file.includes(:tags) }
   end
 
   def new
-    render :new, locals: { document: Document.new }
+    render :new, locals: { document: Document.new, all_tags: all_tags }
   end
 
   def create
@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    render :edit, locals: { document: Document.find(params[:id]) }
+    render :edit, locals: { document: Document.find(params[:id]), all_tags: all_tags }
   end
 
   def update
@@ -23,10 +23,14 @@ class DocumentsController < ApplicationController
   private
 
   def update_params
-    params.require(:document).permit(:name, :description, :file)
+    params.require(:document).permit(:name, :description, :file, tag_ids: [])
   end
 
   def create_params
-    params.require(:document).permit(:name, :description, :file)
+    params.require(:document).permit(:name, :description, :file, tag_ids: [])
+  end
+
+  def all_tags
+    Tag.all
   end
 end

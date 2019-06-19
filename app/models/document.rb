@@ -5,8 +5,10 @@ class Document < ApplicationRecord
   has_and_belongs_to_many :tags
 
   def thumbnail(size)
-    return nil if file.nil?
+    return nil unless file.present?
+
     return file.preview(resize: size) if file.previewable?
-    return file.variant(resize: size)
+
+    file.variant(resize: size)
   end
 end

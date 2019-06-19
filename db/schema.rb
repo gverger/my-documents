@@ -43,12 +43,15 @@ ActiveRecord::Schema.define(version: 2019_06_17_080126) do
   create_table "documents_tags", id: false, force: :cascade do |t|
     t.integer "document_id", null: false
     t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["document_id"], name: "index_documents_tags_on_document_id"
     t.index ["tag_id"], name: "index_documents_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
+    t.string "color", default: "white", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
