@@ -5,7 +5,7 @@
         <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex">
           <div class="w-4/5 flex">
             <% if document.file.present? %>
-              <%= image_tag document.thumbnail("100x100"), class: "h-16 shadow-xl mr-6" %>
+              <%= link_to image_tag(document.thumbnail("100x100"),class: "h-16 shadow-xl mr-6" ),rails_blob_path(document.file, disposition: "attachment") %>
             <% end %>
             <div class="text-left w-auto inline-block">
               <div class="flex items-center">
