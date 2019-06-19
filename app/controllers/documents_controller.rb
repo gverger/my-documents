@@ -23,10 +23,10 @@ class DocumentsController < ApplicationController
   private
 
   def update_params
-    params.require(:document).permit(:name, :file)
+    params.require(:document).permit(:name, :description, :file)
   end
 
   def create_params
-    params.require(:document).permit(:name, :file)
+    params.require(:document).permit(:name, :description, :file)
   end
 end

@@ -10,10 +10,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <nav class="flex items-center justify-between flex-wrap bg-orange-400 py-6 px-10">
+  <body class="bg-gray-100">
+    <nav class="flex items-center justify-between flex-wrap bg-orange-400 py-6 px-10 mb-10">
       <div class="flex items-center flex-shrink-0 text-white mr-8">
-        <span class="font-semibold text-xl tracking-tight">Documents</span>
+        <%= link_to "Documents", root_path, class: "font-semibold text-xl tracking-tight" %>
       </div>
     </nav>
 
