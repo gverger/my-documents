@@ -56,3 +56,18 @@
     </div>
   <% end %>
 </div>
+
+<script charset="utf-8" type="text/javascript">
+  addEventListener("direct-upload:initialize", event => {
+    const inputName = document.getElementById('document_name')
+    if (inputName.value) { return }
+
+    const { _target, detail } = event
+    const { _id, file } = detail
+    let name = file.name
+    if (name.lastIndexOf(".") != -1) {
+      name = name.substring(0, name.lastIndexOf("."));
+    }
+    inputName.value = name
+  })
+</script>

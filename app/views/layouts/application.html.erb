@@ -23,6 +23,9 @@
             <%= text_field_tag :search, params[:search], class: 'appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none' %>
         <% end %>
       </div>
+      <div class="w-1/4 items-center flex flex-row-reverse">
+        <%= link_to "New", new_document_path, class: "bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded shadow-lg" %>
+      </div>
     </nav>
     <%= yield %>
   </body>
