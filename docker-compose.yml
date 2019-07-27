@@ -7,3 +7,16 @@ services:
     command:
       - solr-precreate
       - development
+  postgres:
+    image: postgres:11-alpine
+    restart: always
+    ports:
+      - "6543:5432"
+    environment:
+      - POSTGRES_USER=documents
+      - POSTGRES_PASSWORD=documents
+    volumes:
+      - pg-documents:/var/lib/postgresql/data
+volumes:
+  pg-documents:
+
