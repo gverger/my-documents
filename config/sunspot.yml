@@ -1,5 +1,6 @@
 production:
   solr:
+    url: ENV['SOLR_URL']
     log_level: WARNING
 
 development:
