@@ -247,7 +247,7 @@ DEPENDENCIES
   pdfjs_viewer-rails
   pry-rails
   puma (~> 3.11)
-  rails (~> 6.0.0.rc1)
+  rails (~> 6.0.0.rc2)
   sass-rails (~> 5)
   selenium-webdriver
   sqlite3 (~> 1.4)
