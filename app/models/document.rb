@@ -75,7 +75,7 @@ class Document < ApplicationRecord
               .gsub(/[^\S\r\n]+/, ' ')
               .gsub(/^\s$/, '')
               .gsub(/\n+/, "\n")
-              .delete('\000')
+              .delete("\000")
         end.join("\n")
       end
     end
