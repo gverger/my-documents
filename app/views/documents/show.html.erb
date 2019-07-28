@@ -43,6 +43,10 @@
       <p class="text-gray-500">Aucun texte détecté...</p>
     <% end %>
   <% else %>
-    <iframe class="container mx-auto h-screen pt-3" src="<%= pdfjs.full_path(file: rails_blob_path(document.file, disposition: "attachment")) %>" frameborder="0"></iframe>
+    <% if document.pdf? %>
+      <iframe class="container mx-auto h-screen pt-3" src="<%= pdfjs.full_path(file: rails_blob_path(document.file, disposition: "attachment")) %>" frameborder="0"></iframe>
+    <% else %>
+      <%= image_tag document.file, class: "container mx-auto pt-3" %>
+    <% end %>
   <% end %>
 </div>

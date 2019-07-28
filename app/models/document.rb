@@ -24,6 +24,10 @@ class Document < ApplicationRecord
     file.variant(resize: size)
   end
 
+  def pdf?
+    file.content_type == 'application/pdf'
+  end
+
   def process_file
     return unless file.present?
 
@@ -32,7 +36,7 @@ class Document < ApplicationRecord
   end
 
   def pdf_text
-    return if file.content_type != 'application/pdf'
+    return unless pdf?
 
     file.open do |f|
       PDF::Reader.new(f).pages.map(&:text).join("\n")
@@ -41,33 +45,37 @@ class Document < ApplicationRecord
 
   def tesseract
     file.open do |f|
-      images =
-        if file.content_type == 'application/pdf'
-          pdf = MiniMagick::Image.new(f.path)
-          pdf.pages.map.with_index do |page, index|
-            page_image = File.open("/tmp/page-pdf-#{index}.jpg", 'wb')
-            MiniMagick::Tool::Convert.new do |convert|
-              convert.background 'white'
-              convert.flatten
-              convert.density 300
-              convert.quality 95
-              convert << page.path
-              convert << page_image.path
-            end
+      Tmp.dir do |dir|
+        images =
+          if file.content_type == 'application/pdf'
+            pdf = MiniMagick::Image.new(f.path)
+            pdf_dir = File.join(dir, 'pdf')
+            pdf.pages.map.with_index do |page, index|
+              page_image = File.open(File.join(pdf_dir, "page-pdf-#{index}.jpg"), 'wb')
+              MiniMagick::Tool::Convert.new do |convert|
+                convert.background 'white'
+                convert.flatten
+                convert.density 300
+                convert.quality 95
+                convert << page.path
+                convert << page_image.path
+              end
 
-            page_image.path
+              page_image.path
+            end
+          else
+            [f.path]
           end
-        else
-          [f.path]
-        end
-      images.flat_map.with_index do |image, index|
-        `tesseract -l fra+eng #{image} /tmp/page-#{index}`
-        File.read("/tmp/page-#{index}.txt")
-            .gsub(/[^[:alnum:],."'\n]/, ' ')
-            .gsub(/[^\S\r\n]+/, ' ')
-            .gsub(/^\s$/, '')
-            .gsub(/\n+/, "\n")
-      end.join("\n")
+        images.flat_map.with_index do |image, index|
+          output = File.join(dir, "page-#{index}")
+          `tesseract -l fra+eng #{image} #{output}`
+          File.read("#{output}.txt")
+              .gsub(/[^[:alnum:],."'\n]/, ' ')
+              .gsub(/[^\S\r\n]+/, ' ')
+              .gsub(/^\s$/, '')
+              .gsub(/\n+/, "\n")
+        end.join("\n")
+      end
     end
   end
 end
