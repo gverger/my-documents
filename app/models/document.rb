@@ -50,6 +50,7 @@ class Document < ApplicationRecord
           if file.content_type == 'application/pdf'
             pdf = MiniMagick::Image.new(f.path)
             pdf_dir = File.join(dir, 'pdf')
+            FileUtils.mkdir_p(pdf_dir)
             pdf.pages.map.with_index do |page, index|
               page_image = File.open(File.join(pdf_dir, "page-pdf-#{index}.jpg"), 'wb')
               MiniMagick::Tool::Convert.new do |convert|
