@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
 
   def create
     document = Document.create!(create_params)
-    document.process_file if create_params[:file]
+    ProcessFileJob.perform_later(document.id) if create_params[:file]
 
     redirect_to documents_path, notice: "Document #{document.name} created"
   end

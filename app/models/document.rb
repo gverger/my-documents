@@ -30,22 +30,4 @@ class Document < ApplicationRecord
   def pdf?
     file.content_type == 'application/pdf'
   end
-
-  def process_file
-    text = extract_text
-
-    return unless text
-
-    update(extracted_text: CleanText.new(text).call)
-  end
-
-  def extract_text
-    return nil unless file.present?
-
-    file.open do |f|
-      return Ocr.new(f).call unless pdf?
-
-      ExtractTextFromPdf.new(f).call
-    end
-  end
 end
