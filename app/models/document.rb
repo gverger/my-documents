@@ -9,10 +9,14 @@ class Document < ApplicationRecord
   # auto_remove is necessary for rails 6: error with `on:` when hooking otherwise
   searchable auto_remove: false do
     text :name, default_boost: 5
-    text :description, default_boost: 2
-    text :extracted_text
+    text :description, default_boost: 2 do
+      description.presence || 'NULL'
+    end
+    text :extracted_text do
+      extracted_text.presence || 'NULL'
+    end
     text :tags do
-      tags.map(&:name)
+      tags.map(&:name).presence || 'NULL'
     end
   end
 
