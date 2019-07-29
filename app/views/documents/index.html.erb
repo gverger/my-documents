@@ -22,6 +22,10 @@
             </div>
           </div>
           <div class="w-1/5 flex items-center flex-row-reverse">
+            <%= link_to document_path(document), method: :delete, class: "hover:text-red-700 text-red-500 font-bold py-2 px-4 rounded items-center" do %>
+              <%= mi.delete %>
+              <span>Delete</span>
+            <% end %>
             <%= link_to edit_document_path(document), class: "hover:text-orange-700 text-orange-500 font-bold py-2 px-4 rounded items-center" do %>
               <%= mi.edit %>
               <span>Edit</span>

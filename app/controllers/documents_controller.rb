@@ -8,8 +8,10 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    doc = Document.create!(create_params)
-    doc.process_file if create_params[:file]
+    document = Document.create!(create_params)
+    document.process_file if create_params[:file]
+
+    redirect_to documents_path, notice: "Document #{document.name} created"
   end
 
   def show
@@ -25,6 +27,13 @@ class DocumentsController < ApplicationController
     document = Document.find(params[:id])
     document.update(update_params)
     document.process_file if create_params[:file]
+  end
+
+  def destroy
+    document = Document.find(params[:id])
+    document.destroy
+
+    redirect_to documents_path, notice: "Document #{document.name} deleted"
   end
 
   private

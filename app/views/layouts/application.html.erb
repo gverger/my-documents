@@ -27,6 +27,23 @@
         <%= link_to "New", new_document_path, class: "bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded shadow-lg" %>
       </div>
     </nav>
+
+    <% if flash[:notice] %>
+      <div class="container mx-auto">
+        <div class="flex bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+          <%= mi.info %>
+          <p class="ml-2"><%= flash[:notice] %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="container mx-auto">
+        <div class="flex bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+          <%= mi.error %>
+          <p class="ml-2"><%= flash[:error] %></p>
+        </div>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
