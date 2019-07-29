@@ -1,0 +1,9 @@
+{
+ "name": "Documents",
+ "description": "Store and retrieve personal documents",
+ "scripts": {
+   "dokku": {
+     "postdeploy": "bundle exec rake db:migrate"
+   }
+ }
+}
