@@ -1,0 +1,16 @@
+<% if !logged_in? %>
+  <%= link_to 'Login', auth_at_provider_path(provider: :google) %>
+<% else %>
+  <div class='flex items-center'>
+    <div class="flex bg-white rounded-full border">
+      <% if current_user.picture %>
+        <%= image_tag current_user.picture, class: 'h-10 w-10 rounded-full mx-auto' %>
+      <% else %>
+        <%=  mi.account_circle.css_class("chip-icon bg-dark") %>
+      <% end %>
+    </div>
+    <p class="flex pl-2">
+      <%= link_to 'Logout', oauth_disconnect_path, class: 'dropdown-item' %>
+    </p>
+  </div>
+<% end %>

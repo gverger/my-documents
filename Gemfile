@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'oauth'
+gem 'oauth2'
+gem 'sorcery'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -35,10 +39,9 @@ gem 'sunspot_rails'
 gem 'sunspot_solr' # Will probably need to live in the development group
 
 gem 'pdf-reader'
-
 gem 'pdfjs_viewer-rails'
 
-gem "sentry-raven"
+gem 'sentry-raven'
 group :production do
   gem 'aws-sdk-s3', require: false
 end
