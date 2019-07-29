@@ -27,6 +27,8 @@ class DocumentsController < ApplicationController
     document = Document.find(params[:id])
     document.update(update_params)
     document.process_file if create_params[:file]
+
+    redirect_to documents_path, notice: "Document #{document.name} updated"
   end
 
   def destroy
