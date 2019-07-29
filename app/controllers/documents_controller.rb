@@ -26,7 +26,7 @@ class DocumentsController < ApplicationController
   def update
     document = Document.find(params[:id])
     document.update(update_params)
-    document.process_file if create_params[:file]
+    ProcessFileJob.perform_later(document.id) if update_params[:file]
 
     redirect_to documents_path, notice: "Document #{document.name} updated"
   end
@@ -65,9 +65,5 @@ class DocumentsController < ApplicationController
     end
 
     search.results
-  end
-
-  def process_file
-
   end
 end
