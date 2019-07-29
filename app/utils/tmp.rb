@@ -12,9 +12,9 @@ module Tmp
   end
 
   def file
-    return Tempfile.create(nil, tmp_root_dir) unless block_given?
+    return Tempfile.create('', tmp_root_dir) unless block_given?
 
-    Tempfile.create(nil, tmp_root_dir) do |file|
+    Tempfile.create('', tmp_root_dir) do |file|
       yield file
     end
   end

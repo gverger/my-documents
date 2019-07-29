@@ -32,59 +32,20 @@ class Document < ApplicationRecord
   end
 
   def process_file
-    return unless file.present?
+    text = extract_text
 
-    text = pdf_text.presence || tesseract
-    update(extracted_text: clean_extracted_text(text))
+    return unless text
+
+    update(extracted_text: CleanText.new(text).call)
   end
 
-  def clean_extracted_text(text)
-    text
-      .gsub(/[^[:alnum:],."'\n]/, ' ')
-      .gsub(/[^\S\r\n]+/, ' ')
-      .gsub(/^\s$/, '')
-      .gsub(/\n+/, "\n")
-      .delete("\u0000")
-  end
-
-  def pdf_text
-    return unless pdf?
+  def extract_text
+    return nil unless file.present?
 
     file.open do |f|
-      PDF::Reader.new(f).pages.map(&:text).join("\n")
-    end
-  end
+      return Ocr.new(f).call unless pdf?
 
-  def tesseract
-    file.open do |f|
-      Tmp.dir do |dir|
-        images =
-          if file.content_type == 'application/pdf'
-            pdf = MiniMagick::Image.new(f.path)
-            pdf_dir = File.join(dir, 'pdf')
-            FileUtils.mkdir_p(pdf_dir)
-            pdf.pages.map.with_index do |page, index|
-              page_image = File.open(File.join(pdf_dir, "page-pdf-#{index}.jpg"), 'wb')
-              MiniMagick::Tool::Convert.new do |convert|
-                convert.background 'white'
-                convert.flatten
-                convert.density 300
-                convert.quality 95
-                convert << page.path
-                convert << page_image.path
-              end
-
-              page_image.path
-            end
-          else
-            [f.path]
-          end
-        images.flat_map.with_index do |image, index|
-          output = File.join(dir, "page-#{index}")
-          `tesseract -l fra+eng #{image} #{output}`
-          File.read("#{output}.txt")
-        end.join("\n")
-      end
+      ExtractTextFromPdf.new(f).call
     end
   end
 end

@@ -42,6 +42,9 @@ gem 'pdf-reader'
 gem 'pdfjs_viewer-rails'
 
 gem 'sentry-raven'
+
+gem 'tty-command'
+
 group :production do
   gem 'aws-sdk-s3', require: false
 end
