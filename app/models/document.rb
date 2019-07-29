@@ -32,7 +32,16 @@ class Document < ApplicationRecord
     return unless file.present?
 
     text = pdf_text.presence || tesseract
-    update(extracted_text: text)
+    update(extracted_text: clean_extracted_text(text))
+  end
+
+  def clean_extracted_text(text)
+    text
+      .gsub(/[^[:alnum:],."'\n]/, ' ')
+      .gsub(/[^\S\r\n]+/, ' ')
+      .gsub(/^\s$/, '')
+      .gsub(/\n+/, "\n")
+      .delete("\u0000")
   end
 
   def pdf_text
@@ -71,11 +80,6 @@ class Document < ApplicationRecord
           output = File.join(dir, "page-#{index}")
           `tesseract -l fra+eng #{image} #{output}`
           File.read("#{output}.txt")
-              .gsub(/[^[:alnum:],."'\n]/, ' ')
-              .gsub(/[^\S\r\n]+/, ' ')
-              .gsub(/^\s$/, '')
-              .gsub(/\n+/, "\n")
-              .delete("\000")
         end.join("\n")
       end
     end
