@@ -6,8 +6,7 @@ class Document < ApplicationRecord
   has_one_attached :file
   has_and_belongs_to_many :tags
 
-  # auto_remove is necessary for rails 6: error with `on:` when hooking otherwise
-  searchable auto_remove: false do
+  searchable do
     text :name, default_boost: 5
     text :description, default_boost: 2 do
       description.presence || 'NULL'
