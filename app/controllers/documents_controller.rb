@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DocumentsController < ApplicationController
   def index
     render :index, locals: { documents: indexed_documents }
@@ -41,11 +43,11 @@ class DocumentsController < ApplicationController
   private
 
   def update_params
-    params.require(:document).permit(:name, :description, :file, tag_ids: [])
+    params.require(:document).permit(:name, :archived_on_or_nil, :description, :file, tag_ids: [])
   end
 
   def create_params
-    params.require(:document).permit(:name, :description, :file, tag_ids: [])
+    params.require(:document).permit(:name, :archived_on_or_nil, :description, :file, tag_ids: [])
   end
 
   def index_params
@@ -57,7 +59,7 @@ class DocumentsController < ApplicationController
   end
 
   def indexed_documents
-    query = Document.with_attached_file.includes(:tags)
+    query = Document.active.with_attached_file.includes(:tags)
     return query unless index_params[:search].present?
 
     search = query.search do
