@@ -2,15 +2,15 @@
   <ul>
     <% documents.each do |document| %>
       <li class="container mx-auto">
-        <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex">
-          <div class="w-4/5 flex">
+        <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex items-center">
+          <%= link_to document_path(document), class:"w-4/5 flex items-center group p-2" do %>
             <% if document.file.present? %>
-              <%= link_to image_tag(document.thumbnail("100x100"),class: "h-16 shadow-xl mr-6" ), document_path(document) %>
+              <%= image_tag(document.thumbnail("100x100"), class: "h-16 shadow-md group-hover:shadow-xl mr-6" ) %>
             <% end %>
             <div class="text-left w-auto inline-block">
-              <div class="flex items-center">
+              <div class="flex">
                 <div class="mr-4">
-                  <h2 class="text-lg mr-6">
+                  <h2 class="text-lg mr-6 text-gray-600 group-hover:text-gray-800">
                     <%= document.name %>
                   </h2>
                   <%= render partial: 'tags_list', locals: { tags: document.tags } %>
@@ -20,13 +20,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          <% end %>
           <div class="w-1/5 flex items-center flex-row-reverse">
-            <%= link_to document_path(document), method: :delete, class: "hover:text-red-700 text-red-500 font-bold py-2 px-4 rounded items-center" do %>
+            <%= link_to document_path(document), method: :delete, class: "hover:text-red-700 text-red-500 font-bold py-2 px-4 rounded" do %>
               <%= mi.delete %>
               <span>Delete</span>
             <% end %>
-            <%= link_to edit_document_path(document), class: "hover:text-orange-700 text-orange-500 font-bold py-2 px-4 rounded items-center" do %>
+            <%= link_to edit_document_path(document), class: "hover:text-orange-700 text-orange-500 font-bold py-2 px-4 rounded" do %>
               <%= mi.edit %>
               <span>Edit</span>
             <% end %>
