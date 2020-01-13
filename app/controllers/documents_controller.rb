@@ -13,7 +13,7 @@ class DocumentsController < ApplicationController
     document = Document.create!(create_params)
     ProcessFileJob.perform_later(document.id) if create_params[:file]
 
-    redirect_to documents_path, notice: "Document #{document.name} created"
+    redirect_to documents_path, notice: "Document #{document.name} créé"
   end
 
   def show
@@ -30,14 +30,14 @@ class DocumentsController < ApplicationController
     document.update(update_params)
     ProcessFileJob.perform_later(document.id) if update_params[:file]
 
-    redirect_to documents_path, notice: "Document #{document.name} updated"
+    redirect_to documents_path, notice: "Document #{document.name} mis à jour"
   end
 
   def destroy
     document = Document.find(params[:id])
     document.destroy
 
-    redirect_to documents_path, notice: "Document #{document.name} deleted"
+    redirect_to documents_path, notice: "Document #{document.name} supprimé"
   end
 
   private
