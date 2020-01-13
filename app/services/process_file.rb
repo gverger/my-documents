@@ -8,7 +8,6 @@ class ProcessFile
     return if !file.present? || !text
 
     document.update!(extracted_text: CleanText.new(text).call)
-    Sunspot.commit_if_dirty
   end
 
   def text

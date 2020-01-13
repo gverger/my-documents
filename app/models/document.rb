@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Document < ApplicationRecord
+  include PgSearch::Model
+
   attribute :name, :string
   attribute :description, :text
   attribute :extracted_text, :text
@@ -10,18 +12,13 @@ class Document < ApplicationRecord
 
   scope :active, ->(date = Date.today) { where(arel_table[:archived_on].gt(date)) }
 
-  searchable do
-    text :name, default_boost: 5
-    text :description, default_boost: 2 do
-      description.presence || 'NULL'
-    end
-    text :extracted_text do
-      extracted_text.presence || 'NULL'
-    end
-    text :tags do
-      tags.map(&:name).presence || 'NULL'
-    end
-  end
+  pg_search_scope :pg_search, against: {
+    name: 'A',
+    description: 'B',
+    extracted_text: 'C'
+  }, associated_against: {
+    tags: :name
+  }, using: { tsearch: { negation: true } }
 
   def thumbnail(size)
     return nil unless file.present?
@@ -42,8 +39,10 @@ class Document < ApplicationRecord
   end
 
   def archived_on_or_nil=(date)
-    self.archived_on = Float::INFINITY if date.nil?
-
-    self.archived_on = date
+    if date.blank?
+      self.archived_on = Float::INFINITY
+    else
+      self.archived_on = date
+    end
   end
 end

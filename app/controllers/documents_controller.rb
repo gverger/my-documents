@@ -62,10 +62,6 @@ class DocumentsController < ApplicationController
     query = Document.active.with_attached_file.includes(:tags)
     return query unless index_params[:search].present?
 
-    search = query.search do
-      fulltext "#{index_params[:search]}~1"
-    end
-
-    search.results
+    query.pg_search(index_params[:search])
   end
 end

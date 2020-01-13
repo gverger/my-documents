@@ -156,7 +156,9 @@ GEM
       rails (> 4.2.0)
       sass-rails (~> 5.0)
     pg (1.2.2)
-    pr_geohash (1.0.0)
+    pg_search (2.3.2)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -200,9 +202,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.6.0)
-    rsolr (2.2.1)
-      builder (>= 2.1.2)
-      faraday (>= 0.9.0)
     ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
     rubyzip (2.0.0)
@@ -233,13 +232,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sunspot (2.5.0)
-      pr_geohash (~> 1.0)
-      rsolr (>= 1.1.1, < 3)
-    sunspot_rails (2.5.0)
-      rails (>= 3)
-      sunspot (= 2.5.0)
-    sunspot_solr (2.5.0)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -289,6 +281,7 @@ DEPENDENCIES
   pdf-reader
   pdfjs_viewer-rails
   pg
+  pg_search
   pry-rails
   puma (~> 3.12)
   rack (~> 2.0.8)
@@ -297,8 +290,6 @@ DEPENDENCIES
   selenium-webdriver
   sentry-raven
   sorcery
-  sunspot_rails
-  sunspot_solr
   tty-command
   turbolinks (~> 5)
   web-console (>= 3.3.0)
