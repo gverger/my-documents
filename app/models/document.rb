@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Document < ApplicationRecord
   attribute :name, :string
   attribute :description, :text
@@ -5,6 +7,8 @@ class Document < ApplicationRecord
 
   has_one_attached :file
   has_and_belongs_to_many :tags
+
+  scope :active, ->(date = Date.today) { where(arel_table[:archived_on].gt(date)) }
 
   searchable do
     text :name, default_boost: 5
@@ -29,5 +33,17 @@ class Document < ApplicationRecord
 
   def pdf?
     file.content_type == 'application/pdf'
+  end
+
+  def archived_on_or_nil
+    return nil if archived_on == Float::INFINITY
+
+    archived_on
+  end
+
+  def archived_on_or_nil=(date)
+    self.archived_on = Float::INFINITY if date.nil?
+
+    self.archived_on = date
   end
 end
