@@ -22,10 +22,9 @@ class Document < ApplicationRecord
 
   def thumbnail(size)
     return nil unless file.present?
+    return nil unless file.representable?
 
-    return file.preview(resize: size) if file.previewable?
-
-    file.variant(resize: size)
+    file.representation(resize: size)
   end
 
   def pdf?
