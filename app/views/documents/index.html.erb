@@ -4,7 +4,7 @@
       <li class="container mx-auto">
         <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex items-center">
           <%= link_to document_path(document), class:"w-4/5 flex items-center group p-2" do %>
-            <% if document.file&.representable? %>
+            <% if document.file.attached? && document.file.representable? %>
               <%= image_tag(document.thumbnail("100x100"), class: "h-16 shadow-md group-hover:shadow-xl mr-6" ) %>
             <% end %>
             <div class="text-left w-auto inline-block">

@@ -22,6 +22,7 @@ class Document < ApplicationRecord
 
   def thumbnail(size)
     return nil unless file.present?
+    return nil unless file.attached?
     return nil unless file.representable?
 
     file.representation(resize: size)
