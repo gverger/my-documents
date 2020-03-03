@@ -21,7 +21,6 @@ class Document < ApplicationRecord
   }, using: { tsearch: { negation: true } }
 
   def thumbnail(size)
-    return nil unless file.present?
     return nil unless file.attached?
     return nil unless file.representable?
 
@@ -29,7 +28,7 @@ class Document < ApplicationRecord
   end
 
   def pdf?
-    file.content_type == 'application/pdf'
+    file.attached? && file.content_type == 'application/pdf'
   end
 
   def archived_on_or_nil
