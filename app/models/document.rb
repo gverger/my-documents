@@ -6,6 +6,7 @@ class Document < ApplicationRecord
   attribute :name, :string
   attribute :description, :text
   attribute :extracted_text, :text
+  attribute :archived_on
 
   has_one_attached :file
   has_and_belongs_to_many :tags
@@ -18,7 +19,7 @@ class Document < ApplicationRecord
     extracted_text: 'C'
   }, associated_against: {
     tags: :name
-  }, using: { tsearch: { negation: true } }
+  }, using: { tsearch: { prefix: true, negation: true } }
 
   def thumbnail(size)
     return nil unless file.attached?
@@ -38,10 +39,10 @@ class Document < ApplicationRecord
   end
 
   def archived_on_or_nil=(date)
-    if date.blank?
-      self.archived_on = Float::INFINITY
-    else
-      self.archived_on = date
-    end
+    self.archived_on = if date.blank?
+                         Float::INFINITY
+                       else
+                         date
+                       end
   end
 end
