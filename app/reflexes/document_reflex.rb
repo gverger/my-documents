@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExampleReflex < ApplicationReflex
+class DocumentReflex < ApplicationReflex
   delegate :render, to: DocumentsController
 
   # Add Reflex methods in this file.
