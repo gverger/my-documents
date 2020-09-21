@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ExampleReflex < ApplicationReflex
+  delegate :render, to: DocumentsController
+
   # Add Reflex methods in this file.
   #
   # All Reflex instances expose the following properties:
@@ -21,4 +23,7 @@ class ExampleReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com
+  def search
+    params # Apparently we need to read params. If method is empty, not rendering at all
+  end
 end

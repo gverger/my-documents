@@ -2,15 +2,15 @@
   <ul>
     <% documents.each do |document| %>
       <li class="container mx-auto">
-        <div class="bg-white rounded-lg p-6 border border-gray mt-8 flex items-center">
+        <div class="flex items-center p-6 mt-8 bg-white border rounded-lg border-gray">
           <%= link_to document_path(document), class:"w-4/5 flex items-center group p-2" do %>
             <% if document.file.attached? && document.file.representable? %>
               <%= image_tag(document.thumbnail("100x100"), class: "h-16 shadow-md group-hover:shadow-xl mr-6" ) %>
             <% end %>
-            <div class="text-left w-auto inline-block">
+            <div class="inline-block w-auto text-left">
               <div class="flex">
                 <div class="mr-4">
-                  <h2 class="text-lg mr-6 text-gray-600 group-hover:text-gray-800">
+                  <h2 class="mr-6 text-lg text-gray-600 group-hover:text-gray-800">
                     <%= document.name %>
                   </h2>
                   <%= render partial: 'tags_list', locals: { tags: document.tags } %>
@@ -21,7 +21,7 @@
               </div>
             </div>
           <% end %>
-          <div class="w-1/5 flex items-center flex-row-reverse">
+          <div class="flex flex-row-reverse items-center w-1/5">
             <%= link_to document_path(document), method: :delete, class: "hover:text-red-700 text-red-500 font-bold py-2 px-4 rounded" do %>
               <%= mi.delete %>
               <span>Delete</span>
