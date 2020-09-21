@@ -20,7 +20,7 @@
             <%= button_tag :submit, name: nil, class:'px-2 text-gray-500 items-center flex leading-none' do %>
               <%= mi.search.css_class('fill-current') %>
             <% end %>
-            <%= text_field_tag :search, params[:search], class: 'appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', data: {reflex:"input->Example#search"} %>
+            <%= text_field_tag :search, params[:search], autocomplete: 'off', class: 'appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none', data: {reflex:"input->Example#search"} %>
         <% end %>
         <%= link_to "New", new_document_path, class: "bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded shadow-lg" %>
       </div>

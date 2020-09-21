@@ -8,18 +8,24 @@ class Document < ApplicationRecord
   attribute :extracted_text, :text
   attribute :archived_on
 
+  attribute :pg_search_highlight
+
   has_one_attached :file
   has_and_belongs_to_many :tags
 
   scope :active, ->(date = Date.today) { where(arel_table[:archived_on].gt(date)) }
 
-  pg_search_scope :pg_search, against: {
-    name: 'A',
-    description: 'B',
-    extracted_text: 'C'
-  }, associated_against: {
-    tags: :name
-  }, using: { tsearch: { prefix: true, negation: true } }
+  pg_search_scope :pg_search,
+                  against: { name: 'A', description: 'B', extracted_text: 'C' },
+                  using: { tsearch: { prefix: true,
+                                      negation: true,
+                                      highlight: {
+                                        StartSel: 'PG_HIGHLIGHT_START',
+                                        StopSel: 'PG_HIGHLIGHT_END',
+                                        MaxWords: 8,
+                                        HighlightAll: true,
+                                        MaxFragments: 1
+                                      } } }
 
   def thumbnail(size)
     return nil unless file.attached?
@@ -44,5 +50,13 @@ class Document < ApplicationRecord
                        else
                          date
                        end
+  end
+
+  def highlighted_search
+    CGI
+      .escapeHTML(pg_search_highlight.to_s)
+      .gsub('PG_HIGHLIGHT_START', '<b class="text-gray-600">')
+      .gsub('PG_HIGHLIGHT_END', '</b>')
+      .html_safe
   end
 end

@@ -59,9 +59,9 @@ class DocumentsController < ApplicationController
   end
 
   def indexed_documents
-    query = Document.active.with_attached_file.includes(:tags)
+    query = Document.active.with_attached_file
     return query unless index_params[:search].present?
 
-    query.pg_search(index_params[:search])
+    query.pg_search(index_params[:search]).with_pg_search_highlight
   end
 end
