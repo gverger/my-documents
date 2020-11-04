@@ -1,10 +1,9 @@
 module Documents
   class AnalyzesController < ApplicationController
     def create
-      document = Document.find(document_id)
-      document.process_file
+      ProcessFileJob.perform_later(document_id)
 
-      redirect_to document_path(document)
+      redirect_to document_path(document_id)
     end
 
     def document_id

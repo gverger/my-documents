@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DocumentsController < ApplicationController
+  MAX_TO_DISPLAY = 12
+
   def index
     render :index, locals: { documents: indexed_documents }
   end
@@ -59,7 +61,7 @@ class DocumentsController < ApplicationController
   end
 
   def indexed_documents
-    query = Document.active.with_attached_file
+    query = Document.active.with_attached_file.limit(MAX_TO_DISPLAY)
     return query unless index_params[:search].present?
 
     query.pg_search(index_params[:search]).with_pg_search_highlight
