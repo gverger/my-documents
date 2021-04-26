@@ -7,7 +7,7 @@ ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rack', '~> 2.1.4'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 
 gem 'oauth'
 gem 'oauth2'
@@ -36,12 +36,11 @@ gem 'sorcery'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'material_icons'
-gem 'mini_magick'
 
 gem 'pg_search'
 
-gem 'pdf-reader'
 gem 'pdfjs_viewer-rails'
+gem 'pdf-reader'
 
 gem 'sentry-raven'
 
@@ -60,8 +59,8 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'web-console', '>= 3.3.0'
   gem 'solargraph'
+  gem 'web-console', '>= 3.3.0'
   gem 'yard'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
@@ -76,4 +75,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "stimulus_reflex", "~> 3.2"
+gem 'stimulus_reflex', '~> 3.2'
