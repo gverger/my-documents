@@ -18,12 +18,13 @@ class OauthsController < ApplicationController
     end
 
     create_from(provider) do |user, failure|
-      if !user.valid?
+      unless user.valid?
         flash[:error] = user.errors.messages.values.join("\n")
         user.destroy
         redirect_to root_path
         return
       end
+
       if failure
         flash[:error] = "Impossible de se connecter via #{provider.titleize}!\n #{failure.inspect}"
         redirect_to root_path
