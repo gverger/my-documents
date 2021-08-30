@@ -42,7 +42,8 @@ gem 'pg_search'
 gem 'pdfjs_viewer-rails'
 gem 'pdf-reader'
 
-gem 'sentry-raven'
+gem 'sentry-rails'
+gem 'sentry-ruby'
 
 gem 'tty-command'
 

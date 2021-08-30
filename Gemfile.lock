@@ -278,8 +278,16 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    sentry-raven (3.1.2)
+    sentry-rails (4.6.5)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.6.0)
+    sentry-ruby (4.6.5)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
+      sentry-ruby-core (= 4.6.5)
+    sentry-ruby-core (4.6.5)
+      concurrent-ruby
+      faraday
     solargraph (0.40.4)
       backport (~> 1.1)
       benchmark
@@ -370,7 +378,8 @@ DEPENDENCIES
   rails (~> 6.1)
   sass-rails (~> 5)
   selenium-webdriver
-  sentry-raven
+  sentry-rails
+  sentry-ruby
   solargraph
   sorcery
   stimulus_reflex (~> 3.2)
