@@ -2,6 +2,9 @@ module.exports = {
   prefix: '',
   important: false,
   separator: ':',
+  purge: [
+    'app/views/*/*.html.erb'
+  ],
   theme: {
     screens: {
       sm: '640px',
