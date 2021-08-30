@@ -39,7 +39,7 @@
       <div class="md:w-2/3 flex items-center">
         <%= f.file_field :file, direct_upload: true, class: 'flex-1' %>
         <% if document.file.present? %>
-          <%= image_tag document.thumbnail("100x100"), class: 'flex h-24 border border-black shadow-xl' %>
+          <%= image_tag document.thumbnail([100, 100]), class: 'flex h-24 border border-black shadow-xl' %>
         <% end %>
       </div>
     </div>

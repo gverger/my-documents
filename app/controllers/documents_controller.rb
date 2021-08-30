@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class DocumentsController < ApplicationController
+  include ActiveStorage::SetCurrent
   MAX_TO_DISPLAY = 12
 
   def index

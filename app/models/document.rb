@@ -31,7 +31,7 @@ class Document < ApplicationRecord
     return nil unless file.attached?
     return nil unless file.representable?
 
-    file.representation(resize: size)
+    file.representation(resize_to_limit: size).processed.url
   end
 
   def pdf?
