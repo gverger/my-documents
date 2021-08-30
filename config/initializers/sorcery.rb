@@ -86,7 +86,7 @@ Rails.application.config.sorcery.configure do |config|
   # Path to ca_file. By default use a internal ca-bundle.crt.
   # Default: `'path/to/ca_file'`
   #
-  # config.ca_file =
+  config.ca_file = Rails.application.credentials.dig(:sorcery, :ca_file)
 
   # config.linkedin.key = ""
   # config.linkedin.secret = ""
@@ -536,5 +536,5 @@ Rails.application.config.sorcery.configure do |config|
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
-  config.user_class = "User"
+  config.user_class = 'User'
 end
