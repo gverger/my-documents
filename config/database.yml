@@ -10,7 +10,7 @@ development:
   user: documents
   password: documents
   host: 127.0.0.1
-  port: 6543
+  port: 5432
 
 test:
   <<: *default
@@ -18,7 +18,7 @@ test:
   user: documents
   password: documents
   host: 127.0.0.1
-  port: 6543
+  port: 5432
 
 production:
   <<: *default

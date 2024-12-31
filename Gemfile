@@ -26,7 +26,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-gem 'image_processing'
+# gem 'image_processing'
+gem 'mini_magick'
 
 gem 'oauth'
 gem 'oauth2'

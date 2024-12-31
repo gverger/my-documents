@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_161605) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "extracted_text"
-    t.date "archived_on", null: false
+    t.date "archived_on", default: "Infinity", null: false
   end
 
   create_table "documents_tags", id: false, force: :cascade do |t|
