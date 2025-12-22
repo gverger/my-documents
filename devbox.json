@@ -1,8 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
   "packages": [
-    "ruby@2.6.8",
-    "bundler@2.2",
     "postgresql@11",
     "tesseract@latest",
     "imagemagick@latest"

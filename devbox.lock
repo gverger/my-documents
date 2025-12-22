@@ -1,12 +1,6 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "bundler@2.2": {
-      "last_modified": "2022-01-26T13:01:16Z",
-      "resolved": "github:NixOS/nixpkgs/e722007bf05802573b41701c49da6c8814878171#bundler",
-      "source": "devbox-search",
-      "version": "2.2.24"
-    },
     "imagemagick@latest": {
       "last_modified": "2024-12-17T11:43:56Z",
       "resolved": "github:NixOS/nixpkgs/4989a246d7a390a859852baddb1013f825435cee#imagemagick",
@@ -93,13 +87,6 @@
       "resolved": "github:NixOS/nixpkgs/2030abed5863fc11eccac0735f27a0828376c84e#postgresql",
       "source": "devbox-search",
       "version": "11.12"
-    },
-    "ruby@2.6.8": {
-      "last_modified": "2021-10-22T02:15:45Z",
-      "plugin_version": "0.0.2",
-      "resolved": "github:NixOS/nixpkgs/718895c14907b60069520b6394b4dbb6e3aa9c33#ruby_2_6",
-      "source": "devbox-search",
-      "version": "2.6.8"
     },
     "tesseract@latest": {
       "last_modified": "2024-12-03T12:40:06Z",

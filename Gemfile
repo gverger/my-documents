@@ -3,8 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.8'
-
+gem 'mutex_m'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rack', '~> 2.1.4'
 gem 'rails', '~> 6.1'
@@ -15,9 +14,11 @@ gem 'puma', '~> 4.3.8'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
+# gem 'webpacker', '~> 5.0'
+gem 'importmap-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
+gem 'turbo-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -77,4 +78,10 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'stimulus_reflex', '~> 3.2'
+gem "stimulus-rails"
+gem 'stimulus_reflex', '~> 3.5'
+
+# StimulusReflex recommends using Redis for session storage
+# gem "redis-session-store", "0.11.5"
+
+gem "action-cable-redis-backport", "~> 1"

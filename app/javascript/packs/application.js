@@ -4,9 +4,10 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+
+import "@hotwire/turobo-rails"
 
 import '../stylesheets/style'
 
@@ -18,3 +19,11 @@ import '../stylesheets/style'
 // const imagePath = (name) => images(name, true)
 
 import "controllers"
+
+$(document).on("turbolinks:load", () => {
+  console.log("turbolinks!");
+});
+$(document).on("turbo:load", () => {
+  console.log("turbo!");
+});
+
